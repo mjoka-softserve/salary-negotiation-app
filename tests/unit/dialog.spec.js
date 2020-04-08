@@ -9,18 +9,18 @@ jest.mock('axios', () => ({
 
 describe('Dialog.vue', () => {
 
-    let wrapper;
-    const message = 'try again'
-    const maxOffer = 1000
-    const minOffer = 1
-    const temperature = 19
+  let wrapper;
+  const message = 'try again'
+  const maxOffer = 1000
+  const minOffer = 1
+  const temperature = 19
 
-    beforeEach(() => {
-        wrapper = shallowMount(Dialog, {
-            propsData: { message, maxOffer, minOffer, temperature },
-        })
-      
+  beforeEach(() => {
+    wrapper = shallowMount(Dialog, {
+      propsData: { message, maxOffer, minOffer, temperature },
     })
+    
+  })
     
   it('renders props.message when passed', () => {
     expect(wrapper.text()).toMatch(message)

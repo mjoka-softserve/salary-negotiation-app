@@ -17,7 +17,6 @@
             </div>
           </div>
         </Tabs>
-
         <Dialog v-show="areBothSalariesSet" :message="dialogMessage" :maxOffer="employerSalary"
         :minOffer="employeeSalary" @click="startNegotiation"/>
       </section>
@@ -62,7 +61,7 @@ export default {
 
     areBothSalariesSet () {
       const { employerSalary, employeeSalary } = this
-       return employerSalary && employeeSalary ? true : false
+      return employerSalary && employeeSalary ? true : false
     },
 
     areExpectedSalariesAcceptable () {
@@ -76,16 +75,13 @@ export default {
     }
   },
 
-
   methods: {
-    updateExpectedSalary(value) {
-      this.employeeSalary = value 
-    },
 
     startNegotiation() {
       this.employeeSalary = 0
       this.employerSalary = 0
     }
+
   }
 
 }
