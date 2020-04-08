@@ -2,7 +2,6 @@
   <div class="negotiation-app">
     <div class="negotiation-app__container">
       <h1>{{ msg }}</h1>
-      <div > Employee:  {{ employeeSalary }}, Employer: {{ employerSalary }} </div>
       <section class="negotiation-content">
         <Tabs :tabs="tabsNames">
           <div class="negotiation-content" :slot="formatSlotName(tabsNames[0])">
@@ -19,7 +18,8 @@
           </div>
         </Tabs>
 
-        <Dialog v-show="areBothSalariesSet" :message="dialogMessage" @click="startNegotiation"/>
+        <Dialog v-show="areBothSalariesSet" :message="dialogMessage" :maxOffer="employerSalary"
+        :minOffer="employeeSalary" @click="startNegotiation"/>
       </section>
     </div>
   </div>
@@ -49,8 +49,8 @@ export default {
   data () {
     return {
       tabsNames: ['I am employee', 'I am employer'],
-      employeeSalary: null,
-      employerSalary: null,
+      employeeSalary: 0,
+      employerSalary: 0,
       successMessage: 'Congrats! You have success in negotiation',
       failureMessage: 'You have failure in negotation'
     }
@@ -81,8 +81,8 @@ export default {
     },
 
     startNegotiation() {
-      this.employeeSalary = null
-      this.employerSalary = null
+      this.employeeSalary = 0
+      this.employerSalary = 0
     }
   }
 

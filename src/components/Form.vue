@@ -3,8 +3,9 @@
         <div class="form-group">
             <input type="number" class="form-control" v-model.number="expectedSalary" required
             :placeholder="'put your expected salary here...'"/>
+            <b class="currency"> $ </b>
         </div>
-        <button type="button" class="btn btn-primary" @click="sendExpectedSalary">Send your salary</button>
+        <button type="button" :disabled="!expectedSalary" class="btn btn-primary" @click="sendExpectedSalary">Send your salary</button>
     </div>
 </template>
 
@@ -32,6 +33,15 @@ export default {
 
         .form-control {
             min-width: 300px;
+        }
+
+        .form-group {
+            display: flex;
+            align-items: center;
+        }
+
+        .currency {
+            margin-left: 15px;
         }
     }
 </style>
