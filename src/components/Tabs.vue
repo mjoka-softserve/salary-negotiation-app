@@ -9,7 +9,6 @@
 </template>
 
 <script>
-
 import SlotNameFormatter from './mixins/SlotNameFormatter'
 
 export default {
@@ -25,6 +24,3 @@ export default {
 }
 
 </script>
-
-<style scoped>
-</style>

@@ -4,7 +4,7 @@ import axios from 'axios'
 import { store } from '@/components/store'
 
 jest.mock('axios', () => ({
-    get: jest.fn(() => Promise.resolve({ data: { main: { temp: 19 } } }))
+  get: jest.fn(() => Promise.resolve({ data: { main: { temp: 19 } } }))
 }))
 
 describe('Dialog.vue', () => {
@@ -14,12 +14,18 @@ describe('Dialog.vue', () => {
   const maxOffer = 1000
   const minOffer = 1
   const temperature = 19
+  const shouldUpdateWeather = true
 
   beforeEach(() => {
     wrapper = shallowMount(Dialog, {
-      propsData: { message, maxOffer, minOffer, temperature },
+      propsData: { 
+        message, 
+        maxOffer, 
+        minOffer, 
+        temperature, 
+        shouldUpdateWeather
+      },
     })
-    
   })
     
   it('renders props.message when passed', () => {
@@ -42,7 +48,6 @@ describe('Dialog.vue', () => {
   })
 
   it('get London temperature', async () => {
-
     const result = await wrapper.vm.getLondonWeatherDetails();
     
     expect(result).toEqual({ data: { main: { temp: 19 } } } );
@@ -50,6 +55,5 @@ describe('Dialog.vue', () => {
     
     expect(axios.get).toBeCalledWith(store.weatherUrl)
   })
-
 
 })

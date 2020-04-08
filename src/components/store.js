@@ -12,8 +12,8 @@ export const store = Vue.observable({
         placeholder: 'put your expected salary here...',
         buttonText: 'Send your proposal'
     },
-    thankYouMessage: 'Thank you for your proposal',
-    successLabel: 'Congrats! You have success in negotiation',
-    failureLabel: 'You have failure in negotation',
+    thankYouMessage: 'Thank you for sending',
+    successLabel: 'Congrats! Your negotiations were successful',
+    failureLabel: 'Failure! Your negotiations were not successful',
     tabsNames: ['I am employee', 'I am employer'],
   })

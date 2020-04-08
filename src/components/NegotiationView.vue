@@ -17,7 +17,7 @@
             </div>
           </div>
         </Tabs>
-        <Dialog v-show="areBothSalariesSet" :message="dialogMessage" :maxOffer="employerSalary"
+        <Dialog v-show="areBothSalariesSet" :shouldUpdateWeather="areBothSalariesSet" :message="dialogMessage" :maxOffer="employerSalary"
         :minOffer="employeeSalary" @click="startNegotiation"/>
       </section>
     </div>
@@ -76,12 +76,10 @@ export default {
   },
 
   methods: {
-
     startNegotiation() {
       this.employeeSalary = 0
       this.employerSalary = 0
     }
-
   }
 
 }
