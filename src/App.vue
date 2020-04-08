@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <NegotiationView msg="Welcome to Your Vue.js App"/>
+    <NegotiationView msg="Negotiate your salary!"/>
   </div>
 </template>
 
