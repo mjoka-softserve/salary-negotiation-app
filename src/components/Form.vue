@@ -2,18 +2,23 @@
     <div class="negotiation-form">
         <div class="form-group">
             <input type="number" class="form-control" v-model.number="expectedSalary" required
-            :placeholder="'put your expected salary here...'"/>
+            :placeholder="staticLabels.placeholder" @keyup.enter="sendExpectedSalary"/>
             <b class="currency"> $ </b>
         </div>
-        <button type="button" :disabled="!expectedSalary" class="btn btn-primary" @click="sendExpectedSalary">Send your salary</button>
+        <button type="button" :disabled="!expectedSalary" class="btn btn-primary" @click="sendExpectedSalary">
+            {{ staticLabels.buttonText }}
+        </button>
     </div>
 </template>
 
 <script>
+import { store } from '@/components/store'
+
 export default {
     data () {
         return {
             expectedSalary: null,
+            staticLabels: store.formLabels
         }
     },
 

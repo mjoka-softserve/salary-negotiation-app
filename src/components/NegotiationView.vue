@@ -7,13 +7,13 @@
           <div class="negotiation-content" :slot="formatSlotName(tabsNames[0])">
             <Form v-model="employeeSalary" v-if="!employeeSalary"/>
             <div class="summary-view" v-else>
-              <h3>Thank you for sending</h3>
+              <h3> {{ thankYouMessage }}</h3>
             </div>
           </div>
            <div class="negotiation-content" :slot="formatSlotName(tabsNames[1])">
             <Form v-model="employerSalary" v-if="!employerSalary"/>
             <div class="summary-view" v-else>
-              <h3>Thank you for sending</h3>
+               <h3> {{ thankYouMessage }}</h3>
             </div>
           </div>
         </Tabs>
@@ -30,6 +30,7 @@ import Tabs from './Tabs'
 import Form from './Form'
 import Dialog from './Dialog'
 import SlotNameFormatter from './mixins/SlotNameFormatter'
+import { store } from '@/components/store'
 
 export default {
   name: 'NegotiationView',
@@ -48,11 +49,12 @@ export default {
 
   data () {
     return {
-      tabsNames: ['I am employee', 'I am employer'],
+      thankYouMessage: store.thankYouMessage,
+      tabsNames: store.tabsNames,
       employeeSalary: 0,
       employerSalary: 0,
-      successMessage: 'Congrats! You have success in negotiation',
-      failureMessage: 'You have failure in negotation'
+      successMessage: store.successLabel,
+      failureMessage: store.failureLabel
     }
   },
 

@@ -2,11 +2,13 @@
     <div class="dialog">
         <div class="dialog__content">
             <h4 class="title"> {{ message }} </h4>
-            <p class="no-margin"> Maximum offer: {{ maxOffer }} $</p>
-            <p> Minimum expected salary: {{ minOffer }} $</p>
-            <button type="button" class="btn btn-info" @click="$emit('click')"> Try again </button>
+            <p class="no-margin"> {{ staticLabels.maxOffer }} {{ maxOffer }} $</p>
+            <p> {{ staticLabels.minOffer }} {{ minOffer }} $</p>
+            <button type="button" class="btn btn-info" @click="$emit('click')"> 
+               {{ staticLabels.buttonText }} 
+            </button>
             <div class="temperature" v-if="temperature">
-                <h5> Current temperature in London </h5>
+                <h5> {{ staticLabels.currentTemperature }} </h5>
                 <div class="temperature__value"> <b> {{ temperature }} &#8451; </b></div>
             </div>
         </div>
@@ -15,6 +17,7 @@
 
 <script>
 import axios from 'axios'
+import { store } from '@/components/store'
 
 export default {
     name:"Dialog",
@@ -31,19 +34,24 @@ export default {
             type: Number,
             required: true,
         }
-
     },
 
     data () {
         return {
-            temperature: null
+            temperature: null,
+            staticLabels: store.dialogLabels
         }
     },
 
     methods: {
-        async getLondonWeatherDetails () {
-            const res = await axios.get('http://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=07e1216e176ad7a6fef4392ceba56cf5&units=metric')
-            this.temperature  = res.data.main.temp
+        getLondonWeatherDetails () {
+            const getPromise = axios.get(store.weatherUrl)
+
+            getPromise.then(res => {
+                this.temperature = Math.floor(res.data.main.temp)
+            })
+
+            return getPromise
         }
     },
 

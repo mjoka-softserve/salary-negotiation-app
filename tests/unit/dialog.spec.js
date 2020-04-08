@@ -1,5 +1,11 @@
 import { shallowMount } from '@vue/test-utils'
 import Dialog from '@/components/Dialog.vue'
+import axios from 'axios'
+import { store } from '@/components/store'
+
+jest.mock('axios', () => ({
+    get: jest.fn(() => Promise.resolve({ data: { main: { temp: 19 } } }))
+}))
 
 describe('Dialog.vue', () => {
 
@@ -7,10 +13,11 @@ describe('Dialog.vue', () => {
     const message = 'try again'
     const maxOffer = 1000
     const minOffer = 1
+    const temperature = 19
 
     beforeEach(() => {
         wrapper = shallowMount(Dialog, {
-            propsData: { message, maxOffer, minOffer }
+            propsData: { message, maxOffer, minOffer, temperature },
         })
       
     })
@@ -33,4 +40,16 @@ describe('Dialog.vue', () => {
 
     expect(wrapper.emitted().click).toBeTruthy()
   })
+
+  it('get London temperature', async () => {
+
+    const result = await wrapper.vm.getLondonWeatherDetails();
+    
+    expect(result).toEqual({ data: { main: { temp: 19 } } } );
+    expect(wrapper.vm.temperature).toEqual(temperature);
+    
+    expect(axios.get).toBeCalledWith(store.weatherUrl)
+  })
+
+
 })
